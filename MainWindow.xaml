@@ -1,0 +1,176 @@
+﻿<Window x:Class="MultiToolLoader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MultiToolLoader.Controls"
+        Title="Multi Tool v2" 
+        Height="600" 
+        Width="1000"
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="800"
+        MinHeight="450">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32" 
+                     ResizeBorderThickness="6"
+                     CornerRadius="12"
+                     GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="MainBorder" 
+            CornerRadius="12" 
+            BorderThickness="1">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6366F1" Offset="0"/>
+                <GradientStop Color="#8B5CF6" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#1E1B4B" Offset="0"/>
+                <GradientStop Color="#312E81" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+            <!-- Window Shadow -->
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" 
+                                 Direction="315" 
+                                 ShadowDepth="5" 
+                                 Opacity="0.2"/>
+            </Border.Effect>
+
+            <!-- Title Bar -->
+            <DockPanel Height="32" 
+                      VerticalAlignment="Top"
+                      LastChildFill="False">
+
+                <!-- Window Title -->
+                <TextBlock Text="Multi Tool v2"
+                          Margin="12,0,0,0"
+                          VerticalAlignment="Center"
+                          Foreground="White"
+                          FontWeight="SemiBold"/>
+
+                <!-- Window Controls -->
+                <StackPanel DockPanel.Dock="Right" 
+                          Orientation="Horizontal"
+                          Margin="0,0,5,0">
+                    <Button x:Name="MinimizeButton" 
+                            Style="{StaticResource WindowControlButton}"
+                            Click="MinimizeButton_Click">
+                        <Path Data="M 0,0 H 10" 
+                              Stroke="White" 
+                              StrokeThickness="1"/>
+                    </Button>
+                    <Button x:Name="MaximizeButton"
+                            Style="{StaticResource WindowControlButton}"
+                            Click="MaximizeButton_Click">
+                        <Path x:Name="MaximizeIcon"
+                              Data="M 0,0 H 10 V 10 H 0 Z"
+                              Stroke="White"
+                              StrokeThickness="1"
+                              Fill="Transparent"/>
+                    </Button>
+                    <Button x:Name="CloseButton"
+                            Style="{StaticResource WindowControlButton}"
+                            Click="CloseButton_Click">
+                        <Path Data="M 0,0 L 10,10 M 0,10 L 10,0"
+                              Stroke="White"
+                              StrokeThickness="1"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Main Content -->
+            <Grid Margin="0,32,0,0">
+                <!-- Side Menu -->
+                <Border Width="200" 
+                        HorizontalAlignment="Left"
+                        Background="#1E1B4B"
+                        BorderBrush="#2D3158"
+                        BorderThickness="0,0,1,0">
+
+                    <StackPanel Margin="0,20">
+                        <RadioButton x:Name="DashboardButton"
+                                   Style="{StaticResource MenuButton}"
+                                   IsChecked="True"
+                                   Checked="MenuButton_Checked">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M3,13H11V3H3M3,21H11V15H3M13,21H21V11H13M13,3V9H21V3" 
+                                      Fill="White" 
+                                      Width="16" 
+                                      Height="16"/>
+                                <TextBlock Text="Dashboard" 
+                                         Margin="12,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="ChatButton"
+                                   Style="{StaticResource MenuButton}"
+                                   Checked="MenuButton_Checked">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z" 
+                                      Fill="White" 
+                                      Width="16" 
+                                      Height="16"/>
+                                <TextBlock Text="Chat" 
+                                         Margin="12,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="SettingsButton"
+                                   Style="{StaticResource MenuButton}"
+                                   Checked="MenuButton_Checked">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" 
+                                      Fill="White" 
+                                      Width="16" 
+                                      Height="16"/>
+                                <TextBlock Text="Einstellungen" 
+                                         Margin="12,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </Border>
+
+                <!-- Content Area -->
+                <Grid Margin="200,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Main Content -->
+                    <ContentPresenter x:Name="MainContent"/>
+
+                    <!-- Status Bar -->
+                    <Border Grid.Row="1" 
+                            Height="24"
+                            Background="#1E1B4B"
+                            BorderBrush="#2D3158"
+                            BorderThickness="0,1,0,0">
+                        <DockPanel LastChildFill="False">
+                            <TextBlock x:Name="StatusText"
+                                     Text="Bereit"
+                                     Foreground="#B0B0B0"
+                                     Margin="10,0"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock x:Name="VersionText"
+                                     Text="Version 2.0.0"
+                                     Foreground="#B0B0B0"
+                                     Margin="10,0"
+                                     DockPanel.Dock="Right"
+                                     VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
